@@ -18,7 +18,7 @@
         </tbody>
       </table>
       <div class="input-buttons">
-        <input v-model="newTodo" type="text" placeholder="New ToDo">
+        <input v-model="newTodo" type="text" placeholder="New ToDo" @keyup.enter="addTodo">
         <button class="add-btn" type="submit" @click="addTodo"><i class="fas fa-plus"></i> Add</button>
         <button class="delete-btn" @click="deleteTodo"><i class="fas fa-trash"></i> Delete</button>
       </div>
