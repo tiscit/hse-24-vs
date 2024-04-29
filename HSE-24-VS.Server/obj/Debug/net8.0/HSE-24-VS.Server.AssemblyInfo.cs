@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HSE-24-VS.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98174959c93cd9b8cccbe1d449042f5df7df1f5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a937b5c7bff6eedb059ed7568011244bafe4c83")]
 [assembly: System.Reflection.AssemblyProductAttribute("HSE-24-VS.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HSE-24-VS.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
