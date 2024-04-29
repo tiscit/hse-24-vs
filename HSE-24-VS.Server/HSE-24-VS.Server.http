@@ -1,6 +1,0 @@
-@HSE_24_VS.Server_HostAddress = http://localhost:5005
-
-GET {{HSE_24_VS.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/HSE-24-VS.Server.props" />
-</Project>
