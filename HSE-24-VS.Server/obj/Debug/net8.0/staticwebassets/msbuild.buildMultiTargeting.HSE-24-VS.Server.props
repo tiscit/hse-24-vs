@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/HSE-24-VS.Server.props" />
+</Project>

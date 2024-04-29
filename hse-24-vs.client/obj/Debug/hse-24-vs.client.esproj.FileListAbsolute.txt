@@ -1,0 +1,1 @@
+/workspaces/hse-24-vs/hse-24-vs.client/obj/Debug/hse-24-vs.client.esproj.CoreCompileInputs.cache
