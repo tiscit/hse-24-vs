@@ -19,20 +19,24 @@ To get started with this project, clone the repository to your local machine:
 ## Usage
 To run the application in development mode, use the following command:
 
+Change to the directory of the project: 
+`cd lab-24-vs`
 
-This will start a local development server, and you can view the application by navigating to `http://localhost:8080` in your web browser.
+Build the docker-image from the definition of the dockerfile:
+`docker build -t lab-24-vs .`
 
-## Versioning
+Run the docker-container: 
+`docker run -p 80 lab-24-vs`
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/yourusername/vue-todolist/tags).
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This will start a local development server, navigating to "PORTS" and open in your web browser.
 
 ## Acknowledgments
 
 - Vue.js for providing a powerful and flexible framework for building web applications.
 - The Vue.js community for the support and resources available.
 
+## References
 
+- https://vuejs.org/
+- https://vuejs.org/guide/introduction.html
+- https://vuejs.org/api/
