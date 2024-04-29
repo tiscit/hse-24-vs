@@ -1,4 +1,4 @@
-# Vue.js ToDo List Application
+# Lab - Parallel and Distributed Systems (HSE): ToDo List Application with Vue.js
 
 ## About
 
