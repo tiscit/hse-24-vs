@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:5173",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "D:\\VS_Repositories\\HSE-24-VS\\HSE-24-VS.Server\\..\\hse-24-vs.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}
