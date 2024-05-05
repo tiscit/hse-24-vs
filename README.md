@@ -20,13 +20,13 @@ To get started with this project, clone the repository to your local machine:
 To run the application in development mode, use the following command:
 
 Change to the directory of the project: <br />
-`cd lab-24-vs`
+`cd lab-24-vs/frontend`
 
 Build the docker-image from the definition of the dockerfile: <br />
-`docker build -t lab-24-vs .`
+`docker build -t frontend .`
 
 Run the docker-container: <br />
-`docker run -p 80 lab-24-vs`
+`docker run -p 80 frontend`
 
 This will start a local development server, navigating to "PORTS" and open in your web browser.
 
