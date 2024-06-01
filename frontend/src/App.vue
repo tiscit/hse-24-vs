@@ -38,22 +38,56 @@ export default {
   },
   data() {
     return {
-      todos: ['First ToDo', 'Second ToDo'], // Initial ToDo list
-      newTodo: '' // Placeholder for new ToDo input
+      BACKEND_URL: window.injectedEnv.BACKEND_URL,
+      todos: ['First ToDo', 'Second ToDo'],
+      newTodo: '',
     }
   },
+  mounted:function(){
+        this.getAllTodos()
+  },
   methods: {
-    addTodo() {
-      if (this.newTodo) {
-        this.todos.push(this.newTodo);
-        this.newTodo = '';
+    async getAllTodos() {
+      console.log("all loaded");
+      try {
+        const response = await fetch(`${this.BACKEND_URL}/todos/`);
+
+        if (response.ok) {
+          const data = await response.json();
+          this.todos.set(data);
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
     },
-    deleteTodo() {
-      const index = this.todos.indexOf(this.newTodo);
-      if (index > -1) {
-          this.todos.splice(index, 1);
-          this.newTodo = ''; // Clear the input field after deletion
+    async addTodo() {
+      if (this.newTodo) {
+        try {
+          const todoToSend = this.newTodo;
+          const response = await fetch(`${this.BACKEND_URL}/todos/${todoToSend}`, {
+            method: "POST",
+          });
+
+          if (response.ok) {
+            this.newTodo.set("");
+            window.location.reload();
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+    },
+    async deleteTodo(todoToDelete) {
+      try {
+        const response = await fetch(`${this.BACKEND_URL}/todos/${todoToDelete}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
     }
   }
