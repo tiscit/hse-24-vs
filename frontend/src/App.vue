@@ -31,7 +31,6 @@
 </template>
 
 <script>
-const BASE_URL = 'http://localhost:8000';
 
 export default {
   name: 'App',
@@ -46,9 +45,8 @@ export default {
   },
   methods: {
     async getAllTodos() {
-      console.log("heeeeeelp");
       try {
-        const response = await fetch(`${BASE_URL}/todos/`);
+        const response = await fetch(`http://localhost:3000/todos/`);
         if (response.ok) {
           const data = await response.json();
           this.todos = data;
@@ -61,7 +59,7 @@ export default {
       if (this.newTodo) {
         try {
           const todoToSend = encodeURIComponent(this.newTodo);
-          const response = await fetch(`${BASE_URL}/todos/${todoToSend}`, {
+          const response = await fetch(`http://localhost:3000/todos/${todoToSend}`, {
             method: "POST"
           });
 
@@ -77,7 +75,7 @@ export default {
     async deleteTodo(todoToDelete) {
       try {
         const todoToSend = encodeURIComponent(todoToDelete);
-        const response = await fetch(`${BASE_URL}/todos/${todoToSend}`, {
+        const response = await fetch(`api/todos/${todoToSend}`, {
           method: "DELETE",
         });
 
