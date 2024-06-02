@@ -28,6 +28,7 @@ services:
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      # - OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 # http endpoint
       - OTEL_EXPORTER_OTLP_ENDPOINT=otelcol:4317
       - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otelcol:4317
       - OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=grpc
@@ -42,5 +43,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VUE_APP_BASE_URL: "http://localhost:8080"
+    depends_on:
+      - todobackend-springboot
     ports:
       - "3000:80"

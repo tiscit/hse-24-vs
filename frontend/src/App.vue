@@ -46,7 +46,9 @@ export default {
   methods: {
     async getAllTodos() {
       try {
-        const response = await fetch(`http://localhost:3000/todos/`);
+        const baseUrl = process.env.VUE_APP_BASE_URL;        
+        console.log("Test1: ", baseUrl);
+        const response = await fetch(`${baseUrl}/todos/`);
         if (response.ok) {
           const data = await response.json();
           this.todos = data;
@@ -59,7 +61,7 @@ export default {
       if (this.newTodo) {
         try {
           const todoToSend = encodeURIComponent(this.newTodo);
-          const response = await fetch(`http://localhost:3000/todos/${todoToSend}`, {
+          const response = await fetch(`${process.env.VUE_APP_SERVER_URL}/todos/${todoToSend}`, {
             method: "POST"
           });
 
@@ -75,7 +77,7 @@ export default {
     async deleteTodo(todoToDelete) {
       try {
         const todoToSend = encodeURIComponent(todoToDelete);
-        const response = await fetch(`api/todos/${todoToSend}`, {
+        const response = await fetch(`${process.env.VUE_APP_SERVER_URL}/todos/${todoToSend}`, {
           method: "DELETE",
         });
 
