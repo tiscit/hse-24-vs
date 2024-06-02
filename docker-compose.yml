@@ -39,10 +39,8 @@ services:
       - postgresdb
 
   frontend:
-    image: tiscit09/frontend:latest
-    networks:
-      - todonet
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
-    environment:
-      - BACKEND_URL=http://localhost:8080

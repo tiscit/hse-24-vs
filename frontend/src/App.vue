@@ -30,31 +30,28 @@
   </div>
 </template>
 
-
 <script>
+const BASE_URL = 'http://localhost:8000';
+
 export default {
   name: 'App',
-  components: {
-  },
   data() {
     return {
-      BACKEND_URL: window.injectedEnv.BACKEND_URL,
-      todos: ['First ToDo', 'Second ToDo'],
+      todos: [],
       newTodo: '',
     }
   },
-  mounted:function(){
-        this.getAllTodos()
+  mounted() {
+    this.getAllTodos();
   },
   methods: {
     async getAllTodos() {
-      console.log("all loaded");
+      console.log("heeeeeelp");
       try {
-        const response = await fetch(`${this.BACKEND_URL}/todos/`);
-
+        const response = await fetch(`${BASE_URL}/todos/`);
         if (response.ok) {
           const data = await response.json();
-          this.todos.set(data);
+          this.todos = data;
         }
       } catch (error) {
         console.error("Error:", error);
@@ -63,14 +60,14 @@ export default {
     async addTodo() {
       if (this.newTodo) {
         try {
-          const todoToSend = this.newTodo;
-          const response = await fetch(`${this.BACKEND_URL}/todos/${todoToSend}`, {
-            method: "POST",
+          const todoToSend = encodeURIComponent(this.newTodo);
+          const response = await fetch(`${BASE_URL}/todos/${todoToSend}`, {
+            method: "POST"
           });
 
           if (response.ok) {
-            this.newTodo.set("");
-            window.location.reload();
+            this.todos.push(this.newTodo);
+            this.newTodo = '';
           }
         } catch (error) {
           console.error("Error:", error);
@@ -79,12 +76,13 @@ export default {
     },
     async deleteTodo(todoToDelete) {
       try {
-        const response = await fetch(`${this.BACKEND_URL}/todos/${todoToDelete}`, {
+        const todoToSend = encodeURIComponent(todoToDelete);
+        const response = await fetch(`${BASE_URL}/todos/${todoToSend}`, {
           method: "DELETE",
         });
 
         if (response.ok) {
-          window.location.reload();
+          this.todos = this.todos.filter(todo => todo !== todoToDelete);
         }
       } catch (error) {
         console.error("Error:", error);
