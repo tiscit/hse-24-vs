@@ -19,21 +19,10 @@ To get started with this project, clone the repository to your local machine:
 ## Usage
 To run the application in development mode, use the following command:
 
-Change to the directory of the project: <br />
-`cd frontend`
+Run the yml-File with docker-compose: <br />
+`docker-compose up`
 
-Build the docker-image from the definition of the dockerfile: <br />
-`docker build -t frontend .`
-
-Run the docker-container: <br />
-`docker run -p 80 frontend`
-
-This will start a local development server, navigating to "PORTS" and open in your web browser.
-
-## Acknowledgments
-
-- Vue.js for providing a powerful and flexible framework for building web applications.
-- The Vue.js community for the support and resources available.
+This will start a local development server. If not prompted by the IDE, navigate to "PORTS" and open the page in your web browser.
 
 ## References
 
