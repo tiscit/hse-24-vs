@@ -45,10 +45,9 @@ export default {
   },
   methods: {
     async getAllTodos() {
+      console.log("test");
       try {
-        const baseUrl = process.env.VUE_APP_BASE_URL;        
-        console.log("Test1: ", baseUrl);
-        const response = await fetch(`${baseUrl}/todos/`);
+        const response = await fetch(`api/todos/`);
         if (response.ok) {
           const data = await response.json();
           this.todos = data;
@@ -60,8 +59,8 @@ export default {
     async addTodo() {
       if (this.newTodo) {
         try {
-          const todoToSend = encodeURIComponent(this.newTodo);
-          const response = await fetch(`${process.env.VUE_APP_SERVER_URL}/todos/${todoToSend}`, {
+          const todo = encodeURIComponent(this.newTodo);
+          const response = await fetch(`api/todos/${todo}`, {
             method: "POST"
           });
 
@@ -74,15 +73,15 @@ export default {
         }
       }
     },
-    async deleteTodo(todoToDelete) {
+    async deleteTodo(deleteTodo) {
       try {
-        const todoToSend = encodeURIComponent(todoToDelete);
-        const response = await fetch(`${process.env.VUE_APP_SERVER_URL}/todos/${todoToSend}`, {
+        const todo = encodeURIComponent(deleteTodo);
+        const response = await fetch(`api/todos/${todo}`, {
           method: "DELETE",
         });
 
         if (response.ok) {
-          this.todos = this.todos.filter(todo => todo !== todoToDelete);
+          this.todos = this.todos.filter(todo => todo !== deleteTodo);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -101,7 +100,6 @@ export default {
   color: #2c3e50;
   margin: 60px auto;
   max-width: 800px;
-  /* Limit the width of the app */
 }
 
 header,
