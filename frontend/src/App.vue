@@ -31,6 +31,17 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+// Define the base URL for the API
+const apiClient = axios.create({
+  baseURL: process.env.VUE_APP_BASE_URL, // This should be set to "http://todobackend-springboot:8080"
+  withCredentials: false,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  }
+});
 
 export default {
   name: 'App',
@@ -45,51 +56,40 @@ export default {
   },
   methods: {
     async getAllTodos() {
-      console.log("test");
       try {
-        const response = await fetch(`api/todos/`);
-        if (response.ok) {
-          const data = await response.json();
-          this.todos = data;
-        }
+        const response = await apiClient.get('/todos/');
+        this.todos = response.data;
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error fetching todos:", error);
       }
     },
     async addTodo() {
       if (this.newTodo) {
         try {
-          const todo = encodeURIComponent(this.newTodo);
-          const response = await fetch(`api/todos/${todo}`, {
-            method: "POST"
-          });
-
-          if (response.ok) {
+          const response = await apiClient.post(`/todos/${encodeURIComponent(this.newTodo)}`);
+          if (response.status === 200) {
             this.todos.push(this.newTodo);
             this.newTodo = '';
           }
         } catch (error) {
-          console.error("Error:", error);
+          console.error("Error adding todo:", error);
         }
       }
     },
-    async deleteTodo(deleteTodo) {
+    async deleteTodo(todo) {
       try {
-        const todo = encodeURIComponent(deleteTodo);
-        const response = await fetch(`api/todos/${todo}`, {
-          method: "DELETE",
-        });
-
-        if (response.ok) {
-          this.todos = this.todos.filter(todo => todo !== deleteTodo);
+        const response = await apiClient.delete(`/todos/${encodeURIComponent(todo)}`);
+        if (response.status === 200) {
+          this.todos = this.todos.filter(t => t !== todo);
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error deleting todo:", error);
       }
     }
   }
 }
 </script>
+
 
 <style>
 #app {

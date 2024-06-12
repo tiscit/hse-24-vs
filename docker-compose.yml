@@ -4,7 +4,6 @@ networks:
   todonet:
 
 services:
-
   postgresdb:
     image: postgres
     networks:
@@ -20,15 +19,11 @@ services:
     image: maeddes/todobackend-springboot:v2404
     networks:
       - todonet
-    build:
-      context: ./todobackend-springboot
-      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      # - OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318 # http endpoint
       - OTEL_EXPORTER_OTLP_ENDPOINT=otelcol:4317
       - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=otelcol:4317
       - OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=grpc
@@ -41,11 +36,13 @@ services:
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: ./frontend  # Ensure this path is correct
+      dockerfile: Dockerfile  # Ensure Dockerfile exists in the context path
       args:
-        VUE_APP_BASE_URL: "http://localhost:8080"
+        VUE_APP_BASE_URL: "http://todobackend-springboot:8080" # This points to the backend within the Docker network
     depends_on:
       - todobackend-springboot
     ports:
       - "3000:80"
+    networks:
+      - todonet
